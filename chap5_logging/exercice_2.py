@@ -1,5 +1,12 @@
 import logging, random
 
+class SensitiveInfoFilter(logging.Filter):
+    def filter(self, record):
+        if "bibli" in record.msg:
+            return False
+        return True
+
+
 livres_logger = logging.getLogger("livres")
 transactions_logger = logging.getLogger("transactions")
 
@@ -8,6 +15,8 @@ transactions_logger.setLevel(logging.WARNING)
 
 livres_stream_handler = logging.StreamHandler()
 livres_logger.addHandler(livres_stream_handler)
+livres_logger.addFilter(SensitiveInfoFilter())
+
 livres_formatter = logging.Formatter("%(asctime)s-%(module)s-%(funcName)s-%(levelname)s-%(message)s", datefmt="(%d/%Y-%I:%M)")
 livres_stream_handler.setFormatter(livres_formatter)
 
