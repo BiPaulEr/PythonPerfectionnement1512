@@ -1,9 +1,17 @@
 import logging
 
+class MyFilter(logging.Filter):
+    def filter(self, record):
+        if "A" in record.msg:
+            return False
+        return True
+
+
 logger = logging.getLogger()
-logger.setLevel(logging.CRITICAL)
+logger.setLevel(logging.DEBUG)
 
 console_handler = logging.StreamHandler()
+console_handler.addFilter(MyFilter())
 logger.addHandler(console_handler)
 
 def info():
