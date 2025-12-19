@@ -21,10 +21,10 @@ handlers:
 
 loggers:
   transactions_logger:
-    level: WARNING
+    level: INFO
     handlers: [transactions_stream_handler]
   livres_logger:
-    level: WARNING
+    level: INFO
     handlers: [livres_stream_handler]
 
 
